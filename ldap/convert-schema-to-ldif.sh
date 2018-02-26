@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-  echo "Must specific a schema file"
+  echo "Must specify a schema file"
 fi
 
 SCHEMAFILE=$1
