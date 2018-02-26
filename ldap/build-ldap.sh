@@ -17,7 +17,7 @@ if [ "x$LINE" != "xy" ]; then
     exit 1
 fi
 
-for foo in slapd bind9-dyndb-ldap ldap-utils
+for foo in slapd bind9-dyndb-ldap ldap-utils python-ldap
 do
     dpkg -L $foo > /dev/null 2> /dev/null
     if [ $? -ne 0 ]; then
@@ -36,5 +36,7 @@ sudo -u openldap -g openldap slaptest -f slapd.conf.j2 -F /etc/ldap/slapd.d/
 service slapd start
 
 ldapadd -Y external -H ldapi:/// -f dnsattributes.ldif
+
+ldapadd -Y external -H ldapi:/// -f netiron.ldif
 
 ldapadd -Y external -H ldapi:/// -f example.net.ldif

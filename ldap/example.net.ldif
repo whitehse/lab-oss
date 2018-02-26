@@ -80,14 +80,19 @@ idnsName: trinity.w
 ARecord: 192.0.2.50
 
 dn: idnsName=bar,idnsName=example.net,ou=dns,dc=example,dc=net
-objectClass: idnsRecord
 objectClass: top
+objectClass: idnsRecord
 idnsName: bar
 CNAMERecord: foo
 
 dn: idnsName=50,idnsName=2.0.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
-objectClass: idnsRecord
 objectClass: top
+objectClass: idnsRecord
 idnsName: 50
 PTRRecord: trinity.w.example.net.
+
+dn: hostname=lab-mlxe,ou=hosts,dc=example,dc=net
+objectclass: top
+objectclass: netIronHost
+hostname: lab-mlxe
 
