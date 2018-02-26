@@ -1,0 +1,59 @@
+include         /etc/ldap/schema/core.schema
+include         /etc/ldap/schema/cosine.schema
+include         /etc/ldap/schema/nis.schema
+include         /etc/ldap/schema/inetorgperson.schema
+
+pidfile         /var/run/slapd/slapd.pid
+
+argsfile        /var/run/slapd/slapd.args
+
+loglevel        none
+
+modulepath	/usr/lib/ldap
+moduleload	back_mdb
+moduleload	syncprov
+
+sizelimit 500
+
+tool-threads 1
+
+# root
+authz-regexp "gidNumber=0\\+uidNumber=0,cn=peercred,cn=external,cn=auth"
+	uid=root
+# bind9-dyndb-ldap performs syncrepl against the ldap server, which
+# requires rootdn access
+authz-regexp "gidNumber=109\\+uidNumber=106,cn=peercred,cn=external,cn=auth"
+	uid=root
+
+backend     mdb
+
+# Config database
+database    config
+rootdn      uid=root
+
+database        mdb
+
+# Primary user facing database
+suffix          dc=example,dc=net
+rootdn          uid=root
+directory       "/var/lib/ldap"
+
+index		objectclass,entryCSN,entryUUID eq
+
+overlay syncprov
+
+lastmod         on
+
+access to attrs=userPassword,shadowLastChange
+        by anonymous auth
+        by self write
+        by * none
+
+access to dn.base=""
+        by * read
+
+# The admin dn has full write access, everyone else
+# can read everything (else).
+access to *
+        by * read
+
