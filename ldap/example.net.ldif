@@ -11,6 +11,12 @@ objectclass: organizationalUnit
 ou: people
 description: Users
 
+dn: ou=groups,dc=example,dc=net
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+description: Groups
+
 dn: ou=hosts,dc=example,dc=net
 objectclass: top
 objectclass: organizationalUnit
@@ -23,15 +29,21 @@ objectClass: organizationalUnit
 ou: dns
 description: DNS
 
-dn: uid=dwhite,dc=example,dc=net
+dn: uid=ansible_provisioner,ou=people,dc=example,dc=net
 objectclass: top
 objectclass: account
 objectclass: posixAccount
-uid: dwhite
-cn: Dan White
+uid: ansible_provisioner
+cn: Ansible Provisioner
 uidNumber: 2000
 gidNumber: 2000
-homeDirectory: /home/dwhite
+homeDirectory: /home/ansible_provisioner
+
+dn: cn=ansible_provisioner,ou=groups,dc=example,dc=net
+objectclass: top
+objectclass: posixGroup
+gidNumber: 2000
+memberUid: ansible_provisioner
 
 # Zone example.com
 dn: idnsName=example.net,ou=dns,dc=example,dc=net
