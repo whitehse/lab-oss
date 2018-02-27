@@ -28,6 +28,8 @@ done
 
 service freeradius stop
 
+### Work in Progress
+
 cat > /etc/freeradius/3.0/mods-available << EOF
 ldap {
     server = "ldapi://"
@@ -48,3 +50,5 @@ ldap {
 EOF
 
 ( cd /etc/freeradius/3.0/mods-enabled/ ; ln -s ../mods-available/ldap . )
+
+service freeradius start

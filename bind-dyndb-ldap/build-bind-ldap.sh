@@ -38,4 +38,9 @@ dynamic-db "bind9-dyndb" {
 };
 EOF
 
+cat > /etc/resolv.conf << EOF
+search example.net
+nameserver 127.0.0.1
+EOF
+
 service bind9 start

@@ -63,18 +63,11 @@ idnsSOAminimum: 86400
 NSRecord: example.net.
 ARecord: 192.168.1.1
 
-# Zone example.org
-dn: idnsName=server, idnsName=example.net,ou=dns,dc=example,dc=net
-objectClass: top
-objectClass: idnsRecord
-idnsName: server
-CNAMERecord: example.com.
-
-# Reverse zone 2.0.192.IN-ADDR.ARPA.
-dn: idnsName=2.0.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
+# Reverse zone 192.168.1.0/24
+dn: idnsName=1.168.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
 objectClass: top
 objectClass: idnsZone
-idnsName: 2.0.192.IN-ADDR.ARPA.
+idnsName: 1.168.192.IN-ADDR.ARPA.
 idnsZoneActive: TRUE
 idnsSOAmName: server.example.net.
 idnsSOArName: root.server.example.net.
@@ -85,36 +78,54 @@ idnsSOAexpire: 604800
 idnsSOAminimum: 86400
 NSRecord: example.net.
 
-dn: idnsName=trinity.w,idnsName=example.net,ou=dns,dc=example,dc=net
-objectClass: top
-objectClass: idnsRecord
-idnsName: trinity.w
-ARecord: 192.0.2.50
-
-dn: idnsName=bar,idnsName=example.net,ou=dns,dc=example,dc=net
-objectClass: top
-objectClass: idnsRecord
-idnsName: bar
-CNAMERecord: foo
-
-dn: idnsName=50,idnsName=2.0.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
-objectClass: top
-objectClass: idnsRecord
-idnsName: 50
-PTRRecord: trinity.w.example.net.
-
 dn: hostname=lab-mlxe,ou=hosts,dc=example,dc=net
 objectclass: top
 objectclass: netIronHost
 hostname: lab-mlxe
+
+dn: idnsName=lab-mlxe,idnsName=example.net,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: lab-mlxe
+ARecord: 192.168.1.10
+
+dn: idnsName=10,idnsName=1.168.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: 10
+PTRRecord: lab-mlxe.example.net.
 
 dn: hostname=lab-cer-top,ou=hosts,dc=example,dc=net
 objectclass: top
 objectclass: netIronHost
 hostname: lab-cer-top
 
+dn: idnsName=lab-cer-top,idnsName=example.net,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: lab-cer-top
+ARecord: 192.168.1.11
+
+dn: idnsName=11,idnsName=1.168.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: 11
+PTRRecord: lab-cer-top.example.net.
+
 dn: hostname=lab-cer-bottom,ou=hosts,dc=example,dc=net
 objectclass: top
 objectclass: netIronHost
 hostname: lab-cer-bottom
+
+dn: idnsName=lab-cer-bottom,idnsName=example.net,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: lab-cer-bottom
+ARecord: 192.168.1.12
+
+dn: idnsName=12,idnsName=1.168.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: 12
+PTRRecord: lab-cer-bottom.example.net.
 
