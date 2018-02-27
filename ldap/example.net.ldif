@@ -96,3 +96,13 @@ objectclass: top
 objectclass: netIronHost
 hostname: lab-mlxe
 
+dn: hostname=lab-cer-top,ou=hosts,dc=example,dc=net
+objectclass: top
+objectclass: netIronHost
+hostname: lab-cer-top
+
+dn: hostname=lab-cer-bottom,ou=hosts,dc=example,dc=net
+objectclass: top
+objectclass: netIronHost
+hostname: lab-cer-bottom
+
