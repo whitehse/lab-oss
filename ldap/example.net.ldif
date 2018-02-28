@@ -57,6 +57,7 @@ cn: Ansible Provisioner
 uidNumber: 2001
 gidNumber: 2001
 homeDirectory: /home/provisioner
+loginShell: /bin/bash
 userPassword: PROVISIONER_PASSWORD
 
 dn: cn=netiron_admins,ou=groups,dc=example,dc=net

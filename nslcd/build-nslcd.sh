@@ -51,4 +51,7 @@ map hosts cn idnsName
 map hosts ipHostNumber ARecord
 EOF
 
+echo "session required pam_mkhomedir.so umask=0022 skel=/etc/skel" >> /etc/pam.d/common-session
+
 service nslcd start
+
