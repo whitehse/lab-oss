@@ -26,6 +26,19 @@ do
     fi
 done
 
+echo ""
+echo "The example_admin user has full administrative access to the"
+echo "dc=example,dc=net database. This user can be used by an LDAP client"
+echo -n "such as Apache Studio to maintain its entries. Enter a new password: "
+
+read EXAMPLE_ADMIN_PASSWORD
+
+echo ""
+echo "The 'provisioner' account has radius access to login to and administer"
+echo -n "all network equipment. It is used by Ansible. Enter a new password: "
+
+read PROVISIONER_PASSWORD
+
 service slapd stop
 
 rm -rf /etc/ldap/slapd.d/*
@@ -39,4 +52,14 @@ ldapadd -Y external -H ldapi:/// -f dnsattributes.ldif
 
 ldapadd -Y external -H ldapi:/// -f netiron.ldif
 
-ldapadd -Y external -H ldapi:/// -f example.net.ldif
+EXAMPLE_LDIF=`mktemp`
+cp example.net.ldif $EXAMPLE_LDIF
+
+sed -i "s/EXAMPLE_ADMIN_PASSWORD/${EXAMPLE_ADMIN_PASSWORD}/g" $EXAMPLE_LDIF
+sed -i "s/PROVISIONER_PASSWORD/${PROVISIONER_PASSWORD}/g" $EXAMPLE_LDIF
+
+#ldapadd -Y external -H ldapi:/// -f $EXAMPLE_LDIF
+slapadd -n 1 -F /etc/ldap/slapd.d -l $EXAMPLE_LDIF
+
+rm $EXAMPLE_LDIF
+

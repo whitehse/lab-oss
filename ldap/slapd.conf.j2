@@ -25,6 +25,14 @@ authz-regexp "gidNumber=0\\+uidNumber=0,cn=peercred,cn=external,cn=auth"
 authz-regexp "gidNumber=109\\+uidNumber=106,cn=peercred,cn=external,cn=auth"
 	uid=root
 
+# SASL
+# uid=<username>,cn=<realm>,cn=digest-md5,cn=auth
+# uid=<username>,cn=digest-md5,cn=auth
+authz-regexp uid=([^,]*),.*,cn=auth
+    uid=$1,out=people,dc=example,dc=net
+
+password-hash   {CLEARTEXT}
+
 backend     mdb
 
 # Config database
@@ -35,7 +43,7 @@ database        mdb
 
 # Primary user facing database
 suffix          dc=example,dc=net
-rootdn          uid=root
+rootdn          uid=example_admin
 directory       "/var/lib/ldap"
 
 index		objectclass,entryCSN,entryUUID eq
