@@ -38,6 +38,8 @@ cn: Administrator for example.net
 uidNumber: 2000
 gidNumber: 2000
 loginShell: /bin/false
+homeDirectory: /home/example_admin
+userPassword: EXAMPLE_ADMIN_PASSWORD
 
 dn: cn=admins,ou=groups,dc=example,dc=net
 objectclass: top
@@ -55,6 +57,7 @@ cn: Ansible Provisioner
 uidNumber: 2001
 gidNumber: 2001
 homeDirectory: /home/provisioner
+userPassword: PROVISIONER_PASSWORD
 
 dn: cn=netiron_admins,ou=groups,dc=example,dc=net
 objectclass: top
@@ -71,8 +74,8 @@ objectClass: idnsRecord
 idnsName: example.net
 idnsUpdatePolicy: grant EXAMPLE.NET krb5-self * A;
 idnsZoneActive: TRUE
-idnsSOAmName: server.example.net.
-idnsSOArName: root.server.example.net.
+idnsSOAmName: teslyn.example.net.
+idnsSOArName: root.teslyn.example.net.
 idnsSOAserial: 1
 idnsSOArefresh: 10800
 idnsSOAretry: 900
@@ -87,8 +90,8 @@ objectClass: top
 objectClass: idnsZone
 idnsName: 1.168.192.IN-ADDR.ARPA.
 idnsZoneActive: TRUE
-idnsSOAmName: server.example.net.
-idnsSOArName: root.server.example.net.
+idnsSOAmName: teslyn.example.net.
+idnsSOArName: root.teslyn.example.net.
 idnsSOAserial: 1
 idnsSOArefresh: 10800
 idnsSOAretry: 900
@@ -100,6 +103,18 @@ dn: hostname=lab-mlxe,ou=hosts,dc=example,dc=net
 objectclass: top
 objectclass: netIronHost
 hostname: lab-mlxe
+
+dn: idnsName=teslyn,idnsName=example.net,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: teslyn
+ARecord: 192.168.1.235
+
+dn: idnsName=235,idnsName=1.168.192.IN-ADDR.ARPA.,ou=dns,dc=example,dc=net
+objectClass: top
+objectClass: idnsRecord
+idnsName: 235
+PTRRecord: teslyn.example.net.
 
 dn: idnsName=lab-mlxe,idnsName=example.net,ou=dns,dc=example,dc=net
 objectClass: top

@@ -20,16 +20,12 @@ tool-threads 1
 # root
 authz-regexp "gidNumber=0\\+uidNumber=0,cn=peercred,cn=external,cn=auth"
 	uid=root
-# bind9-dyndb-ldap performs syncrepl against the ldap server, which
-# requires rootdn access
-authz-regexp "gidNumber=109\\+uidNumber=106,cn=peercred,cn=external,cn=auth"
-	uid=root
 
 # SASL
 # uid=<username>,cn=<realm>,cn=digest-md5,cn=auth
 # uid=<username>,cn=digest-md5,cn=auth
 authz-regexp uid=([^,]*),.*,cn=auth
-    uid=$1,out=people,dc=example,dc=net
+    uid=$1,ou=people,dc=example,dc=net
 
 password-hash   {CLEARTEXT}
 
@@ -61,7 +57,7 @@ access to dn.base=""
         by * read
 
 # The admin dn has full write access, everyone else
-# can read everything (else).
+# can read everything.
 access to *
         by * read
 

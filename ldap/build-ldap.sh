@@ -63,3 +63,7 @@ slapadd -n 1 -F /etc/ldap/slapd.d -l $EXAMPLE_LDIF
 
 rm $EXAMPLE_LDIF
 
+service nslcd stop
+service nslcd start
+service nscd stop
+service nscd start
