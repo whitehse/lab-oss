@@ -133,7 +133,7 @@ post-auth {
         ldap
 
         if (Huntgroup-Name == "netiron") {
-            if (!(LDAP-Group == "netiron-admins")) {
+            if (!(LDAP-Group == "netiron_admins")) {
                 reject
             }
             else {
