@@ -21,6 +21,10 @@ tool-threads 1
 authz-regexp "gidNumber=0\\+uidNumber=0,cn=peercred,cn=external,cn=auth"
 	uid=root
 
+# gidNumber=2001+uidNumber=2001,cn=peercred,cn=external,cn=auth
+authz-regexp gidNumber=([^\\+]*)\\+uidNumber=([^,]*),cn=peercred,cn=external,cn=auth
+    ldap:///ou=people,dc=example,dc=net??one?(uidNumber=$2)
+
 # SASL
 # uid=<username>,cn=<realm>,cn=digest-md5,cn=auth
 # uid=<username>,cn=digest-md5,cn=auth
