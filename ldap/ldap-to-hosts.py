@@ -30,14 +30,22 @@ for dn,entry in res:
   d['_meta']['hostvars'][host]['hostname'] = host
 
 d['routers'] = {}
+d['routers']['vars'] = {}
+d['routers']['vars']['user'] = 'provisioner'
 
 routers = []
 
 for dn,entry in res:
   host = entry['hostName'][0]
   routers.append(host)
+  
 
 d['routers']['hosts'] = routers
   
+res = l.search_s("ou=people,dc=example,dc=net",ldap.SCOPE_SUBTREE,'(uid=provisioner)',['userPassword'])
+
+for dn,entry in res:
+  d['routers']['vars']['password'] = entry['userPassword'][0]
+
 output = json.dumps(d, indent=2)
 print output
